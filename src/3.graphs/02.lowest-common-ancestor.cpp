@@ -1,12 +1,11 @@
-int n, l; // l == logN (usually about ~20)
+int n, l; // l == logN (usually about ~20) for subtree kind of queries
 vector<vector<int>> adj;
 
 int timer;
 vector<int> tin, tout;
 vector<vector<int>> up;
 
-void dfs(int v, int p)
-{
+void dfs(int v, int p){
     tin[v] = ++timer;
     up[v][0] = p;
     // wUp[v][0] = weight[v][u]; // <- path weight sum to 2^i-th ancestor
@@ -22,13 +21,11 @@ void dfs(int v, int p)
     tout[v] = ++timer;
 }
 
-bool isAncestor(int u, int v)
-{
+bool isAncestor(int u, int v){
     return tin[u] <= tin[v] && tout[v] <= tout[u];
 }
 
-int lca(int u, int v)
-{
+int lca(int u, int v){
     if (isAncestor(u, v))
         return u;
     if (isAncestor(v, u))

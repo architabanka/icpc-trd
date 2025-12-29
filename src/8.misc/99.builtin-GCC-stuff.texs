@@ -5,4 +5,12 @@
     \item \texttt{\_\_builtin\_parity(x)}: the parity of the number of ones in the bit representation.
     \item \texttt{\_\_gcd(x, y)}: the greatest common divisor of two numbers.
     \item \texttt{\_\_int128\_t}: the 128-bit integer type. Does not support input/output.
+    \item \texttt{\_\_builtin\_powi(x, n)}: Computes x raised to integer power n efficiently.
+    \item \texttt{\_\_builtin\_ffs(x)}: Finds the position of the first (least significant) set bit. Returns one plus the index of the least significant 1-bit, or 0 if x is 0.
+    \item \texttt{\_\_int128}: Can be used in arithmetic operations. For I/O, custom functions
+        void print(__int128 x) { \newline
+            if (x < 0) { putchar('-'); x = -x; } \newline
+            if (x > 9) print(x / 10); \newline
+            putchar(x % 10 + '0'); \newline
+        }
 \end{itemize}

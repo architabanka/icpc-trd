@@ -11,3 +11,4 @@ ll pwr(ll a, ll b, ll m) {
     }
     return res;
 }
+ll modinv(lla, ll m){return pwr(a,m-2,m);}

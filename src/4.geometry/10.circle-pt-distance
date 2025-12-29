@@ -1,0 +1,47 @@
+ld dist(pt p1, pt p2) {
+    return hypot(p1.x-p2.x,p1.y-p2.y);
+}
+ld dline(pt p, pt a, pt b) {
+    ld l2=pow(a.x-b.x,2)+pow(a.y-b.y,2);
+    if(l2==0)return dist(p,a);   
+    
+    ld t = ((p.x-a.x)*(b.x-a.x)+(p.y-a.y)*(b.y-a.y))/l2;
+    t = max((ld)0.0, min((ld)1.0, t));   
+    pt proj = {a.x+t*(b.x-a.x),a.y+t*(b.y-a.y)};
+    
+    return dist(p, proj);
+}
+ld leng(ld theta,pt c,ld r,pt a,pt b) {
+    pt p={c.x+r*cos(theta),c.y+r*sin(theta)};
+    return dist(a,p)+dist(b,p);
+}
+void solve() {
+    if (dist(a,c)<=r||dist(b,c)<=r) {
+        cout<<fixed<<setprecision(10)<<dist(a,b)<<'\n';
+        return;
+    }
+    if (dline(c,a,b)<=r) {
+        cout<<fixed<<setprecision(10)<<dist(a,b)<<'\n';
+        return;
+    }
+    ld anga=atan2(a.y-c.y,a.x-c.x);
+    ld angb=atan2(b.y-c.y,b.x-c.x);
+    ld pi=acos(-1.0);
+ 
+    while(angb-anga>pi)angb-=2*pi;
+    while(angb-anga<-pi)angb+=2*pi;
+ 
+    ld low=min(anga,angb);
+    ld high=max(anga,angb);
+ 
+    for (int i=0;i<100;i++) {
+        ld m1=low+(high-low)/3;
+        ld m2=high-(high-low)/3;
+        if (leng(m1,c,r,a,b)<leng(m2,c,r,a,b)) {
+            high=m2;
+        } else {
+            low=m1;
+        }
+    }
+    cout<<fixed<<setprecision(10)<<leng(low,c,r,a,b)<< '\n';
+}
